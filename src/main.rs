@@ -1,19 +1,21 @@
 use serde::Deserialize;
+
+pub mod ui;
 #[derive(Deserialize, Debug)]
-struct IssData {
-    name: String,
-    id: u32,
-    latitude: f64,
-    longitude: f64,
-    altitude: f64,
-    velocity: f64,
-    visibility: String,
-    footprint: f64,
-    timestamp: u64,
-    daynum: f64,
-    solar_lat: f64,
-    solar_lon: f64,
-    units: String,
+pub struct IssData {
+    pub name: String,
+    pub id: u32,
+    pub latitude: f64,
+    pub longitude: f64,
+    pub altitude: f64,
+    pub velocity: f64,
+    pub visibility: String,
+    pub footprint: f64,
+    pub timestamp: u64,
+    pub daynum: f64,
+    pub solar_lat: f64,
+    pub solar_lon: f64,
+    pub units: String,
 }
 
 #[tokio::main]
