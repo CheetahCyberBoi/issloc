@@ -3,6 +3,9 @@ use std::io;
 use serde::Deserialize;
 use crossterm::event::{self, Event, KeyCode, KeyEvent, KeyEventKind};
 use crate::tui::Action;
+use tokio::sync::mpsc;
+
+use pollster::FutureExt as _;
 
 
 pub mod ui;
@@ -34,6 +37,7 @@ struct App {
 impl App {
     pub fn run(&mut self, terminal: &mut tui::Tui) -> io::Result<()> {
         while !self.should_exit {
+            self.current_data = self.ping_api("https://wheretheiss.at/v1/satellites/25544" /*The ID for the ISS*/).block_on().expect("Failed to update ISS data in main thread!");
             self.handle_events()?;
             terminal.draw(|frame| ui::ui(self, frame))?;
         }
@@ -59,6 +63,26 @@ impl App {
             _ => {}
         };
         Ok(())
+    }
+
+    pub async fn ping_api(&'static mut self, api: &'static str) -> Option<IssData> {
+        let (tx, mut rx) = mpsc::channel(32);
+        tokio::spawn(async move {
+            loop {
+                let resp = reqwest::get(api)
+                    .await.expect("Failed to require response from wheretheiss.at!")
+                    .json::<IssData>()
+                    .await.expect("Failed to convert response to JSON!");
+                tx.send(resp).await.expect("Failed to send response to main thread!");
+                tokio::time::sleep(std::time::Duration::from_millis(self.delay)).await;
+            }
+
+        });
+
+        while let Some(response) = rx.recv().await {
+            return Some(response);
+        }
+        None
     }
 }
 
