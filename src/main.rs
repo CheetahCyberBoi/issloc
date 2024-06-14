@@ -43,7 +43,7 @@ impl App {
     }
     pub fn run(&mut self, terminal: &mut tui::Tui) -> io::Result<()> {
         while !self.should_exit {
-            self.current_data = self.ping_api("https://wheretheiss.at/v1/satellites/25544".to_string() /*The ID for the ISS*/).expect("Failed to update ISS data in main thread!");
+            self.current_data = self.ping_api("https://api.wheretheiss.at/v1/satellites/25544".to_string() /*The ID for the ISS*/).expect("Failed to update ISS data in main thread!");
             self.handle_events()?;
             terminal.draw(|frame| ui::ui(self, frame))?;
         }
