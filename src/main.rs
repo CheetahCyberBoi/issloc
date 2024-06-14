@@ -94,7 +94,7 @@ impl App {
                 let resp = ureq::get(api.as_str())
                     .call().unwrap().into_json::<IssData>().ok();
         match resp {
-            Some(resp) => info!("Got data from API!"),
+            Some(ref resp) => info!("Got data from API!"),
             None => warn!("No data from API!"),
         }
         resp
