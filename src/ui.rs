@@ -12,7 +12,7 @@ pub fn ui(data: &IssData, frame: &mut Frame) {
     let layout = Layout::default()
         .direction(Direction::Vertical)
         .constraints(vec![
-            Constraint::Min(5),
+            Constraint::Min(8),
             Constraint::Percentage(100),
         ]).split(frame.size());
     
@@ -32,7 +32,7 @@ pub fn ui(data: &IssData, frame: &mut Frame) {
     ]));
 
     lines.push(ratatui::text::Line::from(vec![
-        Span::styled("International Space Station", Style::default().fg(Color::Gray).add_modifier(Modifier::BOLD)),
+        Span::styled("International Space Station ", Style::default().fg(Color::Gray).add_modifier(Modifier::BOLD)),
         Span::styled(format!("ID {}", 25544), Style::default().fg(Color::DarkGray).add_modifier(Modifier::ITALIC)),
     ]));
     
@@ -80,6 +80,10 @@ pub fn ui(data: &IssData, frame: &mut Frame) {
     let instructions = Title::from(ratatui::text::Line::from(vec![
         " Ping ".into(),
         "<Enter>".blue().bold(),
+        " Increase delay ".into(),
+        "<Right>".green().bold(),
+        " Decrease delay ".into(),
+        "<Left>".green().bold(),
         " Quit ".into(),
         "<Q>".red().bold(),
     ]));
