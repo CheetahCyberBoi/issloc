@@ -55,6 +55,7 @@ impl App {
                 self.current_data = self.ping_api("https://api.wheretheiss.at/v1/satellites/25544".to_string() /*The ID for the ISS*/).expect("Failed to automatically update ISS data in main thread!");
             }
             self.handle_events()?;
+            debug!("Data from the API: {}", self.current_data);
             terminal.draw(|frame| ui::ui(self, frame))?;
         }
         Ok(())
