@@ -77,12 +77,10 @@ impl App {
     pub async fn ping_api(&mut self, api: String) -> Option<IssData> {
         let (tx, mut rx) = mpsc::channel(32);
         //absolute wizardry, not my code lol
-        tokio::spawn(async move {
                 let resp = reqwest::get(api.as_str())
                     .await.and_then(|x| x.json::<IssData>().block_on()).ok();
                 tx.send(resp).await.expect("Failed to send response to main thread!");
-        });
-
+        
         while let Some(response) = rx.recv().await {
             return response;
         }
