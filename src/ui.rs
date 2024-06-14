@@ -30,7 +30,8 @@ pub fn ui(data: &IssData, frame: &mut Frame) {
         Span::styled("Currently tracking: ", Style::default().fg(Color::Green).add_modifier(Modifier::ITALIC)),
     ]));
     lines.push(Line::from(vec![
-        Span::styled("International Space Station", Style::default().fg(Color::Gray).add_modifier(Modifier::BOLD))
+        Span::styled("International Space Station", Style::default().fg(Color::Gray).add_modifier(Modifier::BOLD)),
+        Span::styled(format!("ID {}", 25544), Style::default().fg(Color::DarkGray).add_modifier(Modifier::ITALIC)),
     ]));
     let currently_tracking_pg = Paragraph::new(Text::from(lines))
         .style(Style::default().fg(Color::White))
@@ -42,7 +43,7 @@ pub fn ui(data: &IssData, frame: &mut Frame) {
         );
     frame.render_widget(currently_tracking_pg, info_layout[0]);
 
-    
+
 
     
     
