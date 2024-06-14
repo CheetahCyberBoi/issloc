@@ -9,7 +9,7 @@ use crate::*;
 
 //This is called every frame to render the UI for displaying data.
 pub fn ui(app: &mut App, frame: &mut Frame) {
-    let data = app.current_data;
+    let data = &app.current_data;
     //First layout: Large Rect, smaller one taking up minmum 5 lines.
     let layout = Layout::default()
         .direction(Direction::Vertical)
