@@ -67,16 +67,15 @@ impl App {
 
     pub async fn ping_api(&'static mut self, api: &'static str) -> Option<IssData> {
         let (tx, mut rx) = mpsc::channel(32);
+        //absolute wizardry, not my code lol
         tokio::spawn(async move {
                 let resp = reqwest::get(api)
-                    .await.expect("Failed to require response from wheretheiss.at!")
-                    .json::<IssData>()
-                    .await.expect("Failed to convert response to JSON!");
+                    .await.and_then(|x| x.json::<IssData>().block_on()).ok();
                 tx.send(resp).await.expect("Failed to send response to main thread!");
         });
 
         while let Some(response) = rx.recv().await {
-            return Some(response);
+            return response;
         }
         None
     }
