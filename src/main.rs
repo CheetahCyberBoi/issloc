@@ -128,7 +128,7 @@ fn setup_logger() -> Result<(), fern::InitError> {
             ))
         })
         .level(log::LevelFilter::Debug)
-        .chain(io::stdout())
+        //.chain(io::stdout()) // we don't need this if we're rendering stuff!
         .chain(fern::log_file("issloc.log")?)
         .apply()?;
     Ok(())

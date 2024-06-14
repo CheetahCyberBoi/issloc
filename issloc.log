@@ -1,0 +1,23 @@
+[2024-06-14T18:16:54Z INFO issloc] Initialized logging!
+[2024-06-14T18:16:54Z INFO issloc] App initialized!
+[2024-06-14T18:16:54Z INFO issloc] Timer ticked! Pinging API!
+[2024-06-14T18:16:54Z DEBUG ureq::stream] connecting to api.wheretheiss.at:443 at 69.164.207.240:443
+[2024-06-14T18:16:54Z DEBUG rustls::client::hs] No cached session for DnsName("api.wheretheiss.at")
+[2024-06-14T18:16:54Z DEBUG rustls::client::hs] Not resuming any session
+[2024-06-14T18:16:54Z DEBUG rustls::client::hs] ALPN protocol is None
+[2024-06-14T18:16:54Z DEBUG rustls::client::hs] Using ciphersuite TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+[2024-06-14T18:16:54Z DEBUG rustls::client::tls12::server_hello] Server supports tickets
+[2024-06-14T18:16:54Z DEBUG rustls::client::tls12] ECDHE curve is EcParameters { curve_type: NamedCurve, named_group: secp256r1 }
+[2024-06-14T18:16:54Z DEBUG rustls::client::tls12] Server DNS name is DnsName("api.wheretheiss.at")
+[2024-06-14T18:16:54Z DEBUG ureq::stream] created stream: Stream(RustlsStream)
+[2024-06-14T18:16:54Z DEBUG ureq::unit] sending request GET https://api.wheretheiss.at/v1/satellites/25544
+[2024-06-14T18:16:54Z DEBUG ureq::unit] writing prelude: GET /v1/satellites/25544 HTTP/1.1
+Host: api.wheretheiss.at
+User-Agent: ureq/2.9.7
+Accept: */*
+accept-encoding: gzip
+[2024-06-14T18:16:54Z DEBUG ureq::response] Body entirely buffered (length: 312)
+[2024-06-14T18:16:54Z DEBUG ureq::pool] adding stream to pool: https|api.wheretheiss.at|443 -> Stream(RustlsStream)
+[2024-06-14T18:16:54Z DEBUG ureq::unit] response 200 to GET https://api.wheretheiss.at/v1/satellites/25544
+[2024-06-14T18:16:54Z DEBUG ureq::stream] dropping stream: Stream(RustlsStream)
+[2024-06-14T18:16:54Z INFO issloc] Got data from API!
