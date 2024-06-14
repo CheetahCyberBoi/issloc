@@ -90,8 +90,8 @@ impl App {
     }
 }
 
-
-fn main() -> Result<(), std::io::Error> {
+#[tokio::main]
+async fn main() -> Result<(), std::io::Error> {
     //Initialize TUI
     let mut terminal = tui::init()?;
     let mut app = App::new();
