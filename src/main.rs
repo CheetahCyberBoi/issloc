@@ -43,8 +43,7 @@ impl App {
     }
     pub fn run(&mut self, terminal: &mut tui::Tui) -> io::Result<()> {
         while !self.should_exit {
-            let data = self.ping_api("https://wheretheiss.at/v1/satellites/25544".to_string() /*The ID for the ISS*/).block_on().expect("Failed to update ISS data in main thread!");
-            self.current_data = data;
+            self.current_data = self.ping_api("https://wheretheiss.at/v1/satellites/25544".to_string() /*The ID for the ISS*/).expect("Failed to update ISS data in main thread!");
             self.handle_events()?;
             terminal.draw(|frame| ui::ui(self, frame))?;
         }
@@ -72,10 +71,10 @@ impl App {
         Ok(())
     }
 
-    pub async fn ping_api(&mut self, api: String) -> Option<IssData> {
+    pub fn ping_api(&mut self, api: String) -> Option<IssData> {
         //absolute wizardry, not my code lol
-                let resp = reqwest::get(api.as_str())
-                    .await.and_then(|x| x.json::<IssData>().block_on()).ok();
+                let resp = ureq::get(api.as_str())
+                    .call().unwrap().into_json::<IssData>().ok();
         resp
     }
 }
