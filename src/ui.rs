@@ -2,6 +2,8 @@ use crate::IssData;
 use ratatui::layout::*;
 use ratatui::Frame;
 
+
+//This is called every frame to render the UI for displaying data.
 pub fn ui(data: &IssData, frame: &mut Frame) {
     //First layout: Large Rect, smaller one taking up minmum 5 lines.
     let layout = Layout::default()
@@ -18,5 +20,8 @@ pub fn ui(data: &IssData, frame: &mut Frame) {
                 Constraint::Percentage(50),
                 Constraint::Percentage(50),
             ]).split(layout[0]);
+    
+
+    
     
 }
