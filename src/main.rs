@@ -2,11 +2,12 @@ use std::io;
 
 use serde::Deserialize;
 use crossterm::event::{self, Event, KeyCode, KeyEvent, KeyEventKind};
+use crate::tui::Action;
 
 
 pub mod ui;
 pub mod tui;
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Default)]
 pub struct IssData {
     pub name: String,
     pub id: u32,
@@ -23,9 +24,11 @@ pub struct IssData {
     pub units: String,
 }
 
+#[derive(Debug, Default)]
 struct App {
     should_exit: bool,
     current_data: IssData,
+    delay: u64, //in ms
 }
 
 impl App {
@@ -37,17 +40,34 @@ impl App {
     }
 
     fn handle_events(&mut self) -> io::Result<()> {
-        todo!()
+        //Read the events
+        match event::read()? {
+            //Important - check if it's a key press since crossterm also emits keyreleases
+            Event::Key(key_event) if key_event.kind == KeyEventKind::Press => {
+                let action = tui::Action::from_keypress(key_event);
+                match action {
+                    Action::Exit => self.should_exit = true,
+                    Action::DecreaseDelayTime => self.delay -= 100,
+                    Action::IncreaseDelayTime => self.delay += 100,
+                    Action::PingRESTAPI => todo!(),
+                    Action::Error => {},
+
+                }
+
+            }
+            _ => {}
+        };
+        Ok(())
     }
 }
 
-#[tokio::main]
-async fn main() -> Result<(), Box<dyn std::error::Error>> {
+
+fn main() -> Result<(), std::io::Error> {
     //Initialize TUI
-
-
-    Ok(())
-
+    let mut terminal = tui::init()?;
+    let app_result = App::default().run(&mut terminal);
+    tui::restore()?;
+    app_result
 }
 
 

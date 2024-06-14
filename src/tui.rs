@@ -1,6 +1,8 @@
 use std::io::{self, stdout, Stdout};
 
 use crossterm::{execute, terminal::*};
+use crossterm::event::*;
+
 use ratatui::prelude::*;
 
 //A gerneral TUI type that is used througought.
@@ -24,6 +26,21 @@ pub fn restore() -> io::Result<()> {
 //Stores the actions that the program can take
 pub enum Action {
     PingRESTAPI,
+    IncreaseDelayTime,
+    DecreaseDelayTime,
     Exit,
+    Error, //DO NOT USE
+}
+
+impl Action {
+    pub fn from_keypress(key_event: crossterm::event::KeyEvent) -> Action {
+        match key_event.code {
+            KeyCode::Char('q') => Action::Exit,
+            KeyCode::Left => Action::DecreaseDelayTime,
+            KeyCode::Right => Action::IncreaseDelayTime,
+            KeyCode::Enter => Action::PingRESTAPI,
+            _ => Action::Error
+        }
+    }
 }
 
