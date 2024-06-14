@@ -4,10 +4,12 @@ use ratatui::Frame;
 use ratatui::prelude::*;
 use ratatui::widgets::{Paragraph, Block, Borders, BorderType, block::Title};
 use ratatui::widgets::canvas::*;
+use crate::*;
 
 
 //This is called every frame to render the UI for displaying data.
-pub fn ui(data: &IssData, frame: &mut Frame) {
+pub fn ui(app: &mut App, frame: &mut Frame) {
+    let data = app.current_data;
     //First layout: Large Rect, smaller one taking up minmum 5 lines.
     let layout = Layout::default()
         .direction(Direction::Vertical)
@@ -50,7 +52,8 @@ pub fn ui(data: &IssData, frame: &mut Frame) {
     let mut lines = vec![];
     lines.push(ratatui::text::Line::from(vec![
         Span::styled("Current information as of timestamp ", Style::default().fg(Color::Blue)),
-        Span::styled(format!("{}", data.timestamp), Style::default().fg(Color::LightBlue).add_modifier(Modifier::BOLD).add_modifier(Modifier::ITALIC))
+        Span::styled(format!("{}", data.timestamp), Style::default().fg(Color::LightBlue).add_modifier(Modifier::BOLD).add_modifier(Modifier::ITALIC)),
+        Span::styled(format!("Ping delay: {}", app.delay), Style::default().fg(Color::DarkGray).add_modifier(Modifier::ITALIC)),
     ]));
 
     //Latitude

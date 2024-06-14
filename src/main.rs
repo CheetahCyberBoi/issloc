@@ -35,7 +35,7 @@ impl App {
     pub fn run(&mut self, terminal: &mut tui::Tui) -> io::Result<()> {
         while !self.should_exit {
             self.handle_events()?;
-            terminal.draw(|frame| ui::ui(&self.current_data, frame))?;
+            terminal.draw(|frame| ui::ui(self, frame))?;
         }
         Ok(())
     }
@@ -48,8 +48,8 @@ impl App {
                 let action = tui::Action::from_keypress(key_event);
                 match action {
                     Action::Exit => self.should_exit = true,
-                    Action::DecreaseDelayTime => self.delay -= 100,
-                    Action::IncreaseDelayTime => self.delay += 100,
+                    Action::DecreaseDelayTime => if self.delay > 0 {self.delay -= 100},
+                    Action::IncreaseDelayTime => if self.delay < 10000 {self.delay += 100},
                     Action::PingRESTAPI => todo!(),
                     Action::Error => {},
 
