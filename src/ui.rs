@@ -1,7 +1,8 @@
 use crate::IssData;
 use ratatui::layout::*;
+use ratatui::Frame;
 
-pub fn ui(data: &IssData, f: &mut Frame) {
+pub fn ui(data: &IssData, frame: &mut Frame) {
     //First layout: Large Rect, smaller one taking up minmum 5 lines.
     let layout = Layout::default()
         .direction(Direction::Vertical)
