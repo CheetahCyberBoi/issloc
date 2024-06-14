@@ -2,10 +2,8 @@ use std::io;
 
 use serde::Deserialize;
 use crossterm::event::{self, Event, KeyCode, KeyEvent, KeyEventKind};
-use crate::tui::Action;
-use tokio::sync::mpsc;
-
 use pollster::FutureExt as _;
+use crate::tui::Action;
 
 
 pub mod ui;
