@@ -53,19 +53,19 @@ pub fn ui(app: &mut App, frame: &mut Frame) {
     lines.push(ratatui::text::Line::from(vec![
         Span::styled("Current information as of timestamp ", Style::default().fg(Color::Blue)),
         Span::styled(format!("{}", data.timestamp), Style::default().fg(Color::LightBlue).add_modifier(Modifier::BOLD).add_modifier(Modifier::ITALIC)),
-        Span::styled(format!("Ping delay: {}", app.delay), Style::default().fg(Color::DarkGray).add_modifier(Modifier::ITALIC)),
+        Span::styled(format!(" (Ping delay: {}ms)", app.delay), Style::default().fg(Color::DarkGray).add_modifier(Modifier::ITALIC)),
     ]));
 
     //Latitude
     lines.push(ratatui::text::Line::from(vec![
         Span::styled("Geo Latitude: ", Style::default().fg(Color::Gray).add_modifier(Modifier::BOLD)),
-        Span::styled(format!("{0:.2}", data.latitude), Style::default().fg(Color::Yellow)),
+        Span::styled(format!("{0:.2} degrees", data.latitude), Style::default().fg(Color::Yellow)),
     ]));
 
     //Longitude
     lines.push(ratatui::text::Line::from(vec![
         Span::styled("Geo longitude: ", Style::default().fg(Color::Gray).add_modifier(Modifier::BOLD)),
-        Span::styled(format!("{0:.2}", data.longitude), Style::default().fg(Color::Yellow)),
+        Span::styled(format!("{0:.2} degrees", data.longitude), Style::default().fg(Color::Yellow)),
     ]));
 
     let tracking_info_pg = Paragraph::new(Text::from(lines))
