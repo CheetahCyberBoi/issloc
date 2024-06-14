@@ -53,7 +53,6 @@ impl App {
             if self.timer.tick() {
                 info!("Timer ticked! Pinging API!");
                 self.current_data = self.ping_api("https://api.wheretheiss.at/v1/satellites/25544".to_string() /*The ID for the ISS*/).expect("Failed to automatically update ISS data in main thread!");
-                terminal.draw(|frame| ui::ui(self, frame))?;
             }
             self.handle_events()?;
             debug!("Data from the API: {:#?}", self.current_data);

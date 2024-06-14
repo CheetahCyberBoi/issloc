@@ -12,6 +12,7 @@ use log::{debug, error, info, trace, warn};
 pub fn ui(app: &mut App, frame: &mut Frame) {
     info!("Constructing UI!");
     let data = &app.current_data;
+    debug!("Data in the UI function: {:#?}", data);
     //First layout: Large Rect, smaller one taking up minmum 5 lines.
     let layout = Layout::default()
         .direction(Direction::Vertical)
