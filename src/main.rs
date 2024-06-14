@@ -35,9 +35,18 @@ struct App {
 }
 
 impl App {
+
+    pub fn new() -> App {
+        App {
+            should_exit: false,
+            current_data: IssData::default(),
+            delay: 500,
+        }
+    }
     pub fn run(&mut self, terminal: &mut tui::Tui) -> io::Result<()> {
         while !self.should_exit {
-            self.current_data = self.ping_api("https://wheretheiss.at/v1/satellites/25544" /*The ID for the ISS*/).block_on().expect("Failed to update ISS data in main thread!");
+            let data = self.ping_api("https://wheretheiss.at/v1/satellites/25544".to_string() /*The ID for the ISS*/).block_on().expect("Failed to update ISS data in main thread!");
+            self.current_data = data;
             self.handle_events()?;
             terminal.draw(|frame| ui::ui(self, frame))?;
         }
@@ -65,11 +74,11 @@ impl App {
         Ok(())
     }
 
-    pub async fn ping_api(&'static mut self, api: &'static str) -> Option<IssData> {
+    pub async fn ping_api(&mut self, api: String) -> Option<IssData> {
         let (tx, mut rx) = mpsc::channel(32);
         //absolute wizardry, not my code lol
         tokio::spawn(async move {
-                let resp = reqwest::get(api)
+                let resp = reqwest::get(api.as_str())
                     .await.and_then(|x| x.json::<IssData>().block_on()).ok();
                 tx.send(resp).await.expect("Failed to send response to main thread!");
         });
@@ -85,7 +94,9 @@ impl App {
 fn main() -> Result<(), std::io::Error> {
     //Initialize TUI
     let mut terminal = tui::init()?;
-    let app_result = App::default().run(&mut terminal);
+    let mut app = App::new();
+    let app_result = app.run(&mut terminal);
+    
     tui::restore()?;
     app_result
 }
