@@ -1,4 +1,3 @@
-use crate::IssData;
 use ratatui::layout::*;
 use ratatui::Frame;
 use ratatui::prelude::*;
@@ -6,9 +5,12 @@ use ratatui::widgets::{Paragraph, Block, Borders, BorderType, block::Title};
 use ratatui::widgets::canvas::*;
 use crate::*;
 
+use log::{debug, error, info, trace, warn};
+
 
 //This is called every frame to render the UI for displaying data.
 pub fn ui(app: &mut App, frame: &mut Frame) {
+    info!("Constructing UI!");
     let data = &app.current_data;
     //First layout: Large Rect, smaller one taking up minmum 5 lines.
     let layout = Layout::default()
@@ -25,6 +27,7 @@ pub fn ui(app: &mut App, frame: &mut Frame) {
                 Constraint::Percentage(50),
                 Constraint::Percentage(50),
             ]).split(layout[0]);
+    info!("Layout made!");
     
 
     //Set up the leftward paragraph: displaying the currently tracked target (always the ISS lol :P)
@@ -47,6 +50,7 @@ pub fn ui(app: &mut App, frame: &mut Frame) {
                 .border_type(BorderType::Thick)
         );
     frame.render_widget(currently_tracking_pg, info_layout[0]);
+    info!("Tracking PG made!");
 
     //Render the rightward paragraph: Contains information about the currently tracked object.
     let mut lines = vec![];
@@ -78,6 +82,7 @@ pub fn ui(app: &mut App, frame: &mut Frame) {
         );
     
     frame.render_widget(tracking_info_pg, info_layout[1]);
+    info!("Tracking info PG made!");
 
     //Add smoe instructions
     let instructions = Title::from(ratatui::text::Line::from(vec![
@@ -107,6 +112,7 @@ pub fn ui(app: &mut App, frame: &mut Frame) {
         .x_bounds([-180.0, 180.0])
         .y_bounds([-90.0, 90.0])
         .paint(|ctx| {
+            info!("Drawing world!");
             ctx.draw(&Map {
                 resolution: MapResolution::High,
                 color: Color::LightGreen,
@@ -114,6 +120,7 @@ pub fn ui(app: &mut App, frame: &mut Frame) {
         });
     
     frame.render_widget(canvas, layout[1]);
+    info!("Map made!");
 
     //Final things: Add some instructions for the keys for querying the ISS data and exiting
 

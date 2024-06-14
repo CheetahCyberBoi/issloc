@@ -1,11 +1,14 @@
 use std::io;
 use std::time::Duration;
+use std::time::SystemTime;
 
 use serde::Deserialize;
 use crossterm::event::{self, Event, KeyCode, KeyEvent, KeyEventKind};
 use pollster::FutureExt as _;
 use crate::tui::Action;
 use crate::timer::Timer;
+use log::{debug, error, info, trace, warn};
+
 
 pub mod ui;
 pub mod tui;
@@ -47,7 +50,8 @@ impl App {
     }
     pub fn run(&mut self, terminal: &mut tui::Tui) -> io::Result<()> {
         while !self.should_exit {
-            if self.timer.tick() == true {
+            if self.timer.tick() {
+                info!("Timer ticked! Pinging API!");
                 self.current_data = self.ping_api("https://api.wheretheiss.at/v1/satellites/25544".to_string() /*The ID for the ISS*/).expect("Failed to automatically update ISS data in main thread!");
             }
             self.handle_events()?;
@@ -89,31 +93,43 @@ impl App {
         //absolute wizardry, not my code lol
                 let resp = ureq::get(api.as_str())
                     .call().unwrap().into_json::<IssData>().ok();
+        match resp {
+            Some(resp) => info!("Got data from API!"),
+            None => warn!("No data from API!"),
+        }
         resp
     }
 }
 
-fn main() -> Result<(), std::io::Error> {
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    //Setup logging
+    setup_logger()?;
+    info!("Initialized logging!");
     //Initialize TUI
     let mut terminal = tui::init()?;
     let mut app = App::new();
+    info!("App initialized!");
     let app_result = app.run(&mut terminal);
     
     tui::restore()?;
-    app_result
+    Ok(app_result?)
 }
 
 
-//Run the application loop, checking for events, polling the REST API and drawing to the screen
-
-// println!("Hello, world! (main)");
-//     tokio::spawn(async move {
-//         let resp = reqwest::get("https://api.wheretheiss.at/v1/satellites/25544")
-//             .await.expect("Failed to acquire response from wheretheiss.at!")
-//             .json::<IssData>()
-//             .await.expect("Failed to convert response to JSON!");
-
-//         println!("Hi from worker! Here's the data: {:#?}", resp);
-//     }).await.expect("Failed to retrieve ISS data on alternate Tokio thread!"); 
-//     println!("back in main bois");
-//     Ok(())
+fn setup_logger() -> Result<(), fern::InitError> {
+    fern::Dispatch::new()
+        .format(|out, message, record| {
+            out.finish(format_args!(
+                "[{} {} {}] {}",
+                humantime::format_rfc3339_seconds(SystemTime::now()),
+                record.level(),
+                record.target(),
+                message
+            ))
+        })
+        .level(log::LevelFilter::Debug)
+        .chain(io::stdout())
+        .chain(fern::log_file("issloc.log")?)
+        .apply()?;
+    Ok(())
+}

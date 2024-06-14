@@ -12,3 +12,6 @@ ratatui = "0.26.3"
 crossterm = "0.27.0"
 pollster = "0.3.0"
 ureq = { version = "2.9.7", features = ["json"] }
+fern = "0.6.2"
+log = "0.4.21"
+humantime = "2.1.0"
