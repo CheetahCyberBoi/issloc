@@ -2,7 +2,7 @@ use crate::IssData;
 use ratatui::layout::*;
 use ratatui::Frame;
 use ratatui::prelude::*;
-use ratatui::widgets::{Paragraph, Block, Borders, BorderType};
+use ratatui::widgets::{Paragraph, Block, Borders, BorderType, block::Title};
 use ratatui::widgets::canvas::*;
 
 
@@ -76,9 +76,27 @@ pub fn ui(data: &IssData, frame: &mut Frame) {
     
     frame.render_widget(tracking_info_pg, info_layout[1]);
 
+    //Add smoe instructions
+    let instructions = Title::from(ratatui::text::Line::from(vec![
+        " Ping ".into(),
+        "<Enter>".blue().bold(),
+        " Quit ".into(),
+        "<Q>".red().bold(),
+    ]));
+
     //Render the bottom box: A large map with a point in it (eventually :P)
     let canvas = Canvas::default()
-        .block(Block::bordered().title("Map View"))
+        .block(
+            Block::default()
+                .title(Title::from("Map View").alignment(Alignment::Center))
+                .title(
+                    instructions
+                        .alignment(Alignment::Center)
+                        .position(ratatui::widgets::block::title::Position::Bottom)
+                )
+                .borders(Borders::ALL)
+                .border_type(BorderType::Thick)
+        )
         .x_bounds([-180.0, 180.0])
         .y_bounds([-90.0, 90.0])
         .paint(|ctx| {
@@ -90,6 +108,10 @@ pub fn ui(data: &IssData, frame: &mut Frame) {
     
     frame.render_widget(canvas, layout[1]);
 
+    //Final things: Add some instructions for the keys for querying the ISS data and exiting
+
+
+        
 
 
 
