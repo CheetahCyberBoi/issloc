@@ -118,6 +118,11 @@ pub fn ui(app: &mut App, frame: &mut Frame) {
                 resolution: MapResolution::High,
                 color: Color::LightGreen,
             });
+            ctx.draw(&Points {
+                coords: &[(data.longitude, data.latitude)],
+                color: Color::White,
+            });
+            ctx.print(data.longitude, data.latitude, ratatui::text::Line::from(vec![Span::styled("ISS", Style::default().fg(Color::Gray).add_modifier(Modifier::ITALIC))]));
         });
     
     frame.render_widget(canvas, layout[1]);
