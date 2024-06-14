@@ -3,6 +3,7 @@ use ratatui::layout::*;
 use ratatui::Frame;
 use ratatui::prelude::*;
 use ratatui::widgets::{Paragraph, Block, Borders, BorderType};
+use ratatui::widgets::canvas::*;
 
 
 //This is called every frame to render the UI for displaying data.
@@ -26,11 +27,11 @@ pub fn ui(data: &IssData, frame: &mut Frame) {
 
     //Set up the leftward paragraph: displaying the currently tracked target (always the ISS lol :P)
     let mut lines = vec![];
-    lines.push(Line::from(vec![
+    lines.push(ratatui::text::Line::from(vec![
         Span::styled("Currently tracking: ", Style::default().fg(Color::Green).add_modifier(Modifier::ITALIC)),
     ]));
 
-    lines.push(Line::from(vec![
+    lines.push(ratatui::text::Line::from(vec![
         Span::styled("International Space Station", Style::default().fg(Color::Gray).add_modifier(Modifier::BOLD)),
         Span::styled(format!("ID {}", 25544), Style::default().fg(Color::DarkGray).add_modifier(Modifier::ITALIC)),
     ]));
@@ -47,19 +48,19 @@ pub fn ui(data: &IssData, frame: &mut Frame) {
 
     //Render the rightward paragraph: Contains information about the currently tracked object.
     let mut lines = vec![];
-    lines.push(Line::from(vec![
+    lines.push(ratatui::text::Line::from(vec![
         Span::styled("Current information as of timestamp ", Style::default().fg(Color::Blue)),
         Span::styled(format!("{}", data.timestamp), Style::default().fg(Color::LightBlue).add_modifier(Modifier::BOLD).add_modifier(Modifier::ITALIC))
     ]));
 
     //Latitude
-    lines.push(Line::from(vec![
+    lines.push(ratatui::text::Line::from(vec![
         Span::styled("Geo Latitude: ", Style::default().fg(Color::Gray).add_modifier(Modifier::BOLD)),
         Span::styled(format!("{0:.2}", data.latitude), Style::default().fg(Color::Yellow)),
     ]));
 
     //Longitude
-    lines.push(Line::from(vec![
+    lines.push(ratatui::text::Line::from(vec![
         Span::styled("Geo longitude: ", Style::default().fg(Color::Gray).add_modifier(Modifier::BOLD)),
         Span::styled(format!("{0:.2}", data.longitude), Style::default().fg(Color::Yellow)),
     ]));
@@ -74,6 +75,20 @@ pub fn ui(data: &IssData, frame: &mut Frame) {
         );
     
     frame.render_widget(tracking_info_pg, info_layout[1]);
+
+    //Render the bottom box: A large map with a point in it (eventually :P)
+    let canvas = Canvas::default()
+        .block(Block::bordered().title("Map View"))
+        .x_bounds([-180.0, 180.0])
+        .y_bounds([-90.0, 90.0])
+        .paint(|ctx| {
+            ctx.draw(&Map {
+                resolution: MapResolution::High,
+                color: Color::LightGreen,
+            });
+        });
+    
+    frame.render_widget(canvas, layout[1]);
 
 
 
