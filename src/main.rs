@@ -31,7 +31,7 @@ struct App {
 impl App {
     pub fn run(&mut self, terminal: &mut tui::Tui) -> io::Result<()> {
         while !self.should_exit {
-            terminal.draw(|frame| ui(self.current_data, frame))?;
+            terminal.draw(|frame| ui::ui(&self.current_data, frame))?;
         }
         Ok(())
     }

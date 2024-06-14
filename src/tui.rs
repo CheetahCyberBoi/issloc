@@ -21,3 +21,9 @@ pub fn restore() -> io::Result<()> {
     Ok(())
 }
 
+//Stores the actions that the program can take
+pub enum Action {
+    PingRESTAPI,
+    Exit,
+}
+
