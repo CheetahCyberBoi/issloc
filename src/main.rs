@@ -1,13 +1,15 @@
 use std::io;
+use std::time::Duration;
 
 use serde::Deserialize;
 use crossterm::event::{self, Event, KeyCode, KeyEvent, KeyEventKind};
 use pollster::FutureExt as _;
 use crate::tui::Action;
-
+use crate::timer::Timer;
 
 pub mod ui;
 pub mod tui;
+pub mod timer;
 #[derive(Deserialize, Debug, Default)]
 pub struct IssData {
     pub name: String,
@@ -25,11 +27,12 @@ pub struct IssData {
     pub units: String,
 }
 
-#[derive(Debug, Default)]
+#[derive(Debug)]
 struct App {
     should_exit: bool,
     current_data: IssData,
     delay: u64, //in ms
+    timer: Timer,
 }
 
 impl App {
@@ -39,11 +42,14 @@ impl App {
             should_exit: false,
             current_data: IssData::default(),
             delay: 500,
+            timer: Timer::new(Duration::from_millis(500)),
         }
     }
     pub fn run(&mut self, terminal: &mut tui::Tui) -> io::Result<()> {
         while !self.should_exit {
-            self.current_data = self.ping_api("https://api.wheretheiss.at/v1/satellites/25544".to_string() /*The ID for the ISS*/).expect("Failed to automatically update ISS data in main thread!");
+            if self.timer.tick() == true {
+                self.current_data = self.ping_api("https://api.wheretheiss.at/v1/satellites/25544".to_string() /*The ID for the ISS*/).expect("Failed to automatically update ISS data in main thread!");
+            }
             self.handle_events()?;
             terminal.draw(|frame| ui::ui(self, frame))?;
         }
@@ -58,8 +64,16 @@ impl App {
                 let action = tui::Action::from_keypress(key_event);
                 match action {
                     Action::Exit => self.should_exit = true,
-                    Action::DecreaseDelayTime => if self.delay > 0 {self.delay -= 100},
-                    Action::IncreaseDelayTime => if self.delay < 10000 {self.delay += 100},
+                    Action::DecreaseDelayTime => {
+                        if self.delay > 0 {self.delay -= 100}
+                        self.timer = Timer::new(Duration::from_millis(self.delay));
+                        self.timer.reset();
+                    },
+                    Action::IncreaseDelayTime => {
+                        if self.delay < 10000 {self.delay += 100}
+                        self.timer = Timer::new(Duration::from_millis(self.delay));
+                        self.timer.reset();
+                    },
                     Action::PingRESTAPI => self.current_data = self.ping_api("https://api.wheretheiss.at/v1/satellites/25544".to_string()).expect("Failed to manually update ISS data!"),
                     Action::Error => {},
 
