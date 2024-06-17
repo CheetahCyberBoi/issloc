@@ -3,11 +3,10 @@ use std::time::Duration;
 use std::time::SystemTime;
 
 use serde::Deserialize;
-use crossterm::event::{self, Event, KeyCode, KeyEvent, KeyEventKind};
-use pollster::FutureExt as _;
+use crossterm::event::{self, Event, KeyEventKind};
 use crate::tui::Action;
 use crate::timer::Timer;
-use log::{debug, error, info, trace, warn};
+use log::{debug, info, warn};
 
 
 pub mod ui;
@@ -31,7 +30,7 @@ pub struct IssData {
 }
 
 #[derive(Debug)]
-struct App {
+pub struct App {
     should_exit: bool,
     current_data: IssData,
     delay: u64, //in ms
@@ -95,7 +94,7 @@ impl App {
                 let resp = ureq::get(api.as_str())
                     .call().unwrap().into_json::<IssData>().ok();
         match resp {
-            Some(ref resp) => info!("Got data from API!"),
+            Some(_) => info!("Got data from API!"),
             None => warn!("No data from API!"),
         }
         resp

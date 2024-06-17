@@ -1,13 +1,14 @@
 use std::rc::Rc;
 
+use crate::*;
+
 use ratatui::layout::*;
 use ratatui::Frame;
 use ratatui::prelude::*;
 use ratatui::widgets::{Paragraph, Block, Borders, BorderType, block::Title};
 use ratatui::widgets::canvas::*;
-use crate::*;
 
-use log::{debug, error, info, trace, warn};
+use log::{debug,info};
 
 
 //This is called every frame to render the UI for displaying data.
@@ -19,9 +20,6 @@ pub fn ui(app: &mut App, frame: &mut Frame) {
     render_currently_tracking_pg(data, frame, layout.1[0]);
     render_tracking_info_pg(data, app.delay, frame, layout.1[1]);
     render_map_view(data, frame, layout.0[1]);
-
-
-
 }
 //Creates the layout for the UI.
 //The left part of the tuple is the main layout, the right part is the sublayout for the info.
@@ -126,7 +124,6 @@ pub fn render_tracking_info_pg(data: &IssData, ping_delay: u64, frame: &mut Fram
     frame.render_widget(tracking_info_pg, rect);
     info!("Tracking info PG made!");
 }
-
 
 //Renders the 'Currently Tracking' paragraph
 pub fn render_currently_tracking_pg(data: &IssData, frame: &mut Frame, rect: Rect) {
