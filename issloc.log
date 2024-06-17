@@ -16951,3 +16951,301 @@ accept-encoding: gzip
 [2024-06-14T18:51:27Z INFO issloc::ui] Tracking info PG made!
 [2024-06-14T18:51:27Z INFO issloc::ui] Drawing world!
 [2024-06-14T18:51:27Z INFO issloc::ui] Map made!
+[2024-06-17T21:16:36Z INFO issloc] Initialized logging!
+[2024-06-17T21:16:36Z INFO issloc] App initialized!
+[2024-06-17T21:16:36Z INFO issloc] Timer ticked! Pinging API!
+[2024-06-17T21:16:36Z DEBUG ureq::stream] connecting to api.wheretheiss.at:443 at 69.164.207.240:443
+[2024-06-17T21:16:36Z DEBUG rustls::client::hs] No cached session for DnsName("api.wheretheiss.at")
+[2024-06-17T21:16:36Z DEBUG rustls::client::hs] Not resuming any session
+[2024-06-17T21:16:37Z DEBUG rustls::client::hs] ALPN protocol is None
+[2024-06-17T21:16:37Z DEBUG rustls::client::hs] Using ciphersuite TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+[2024-06-17T21:16:37Z DEBUG rustls::client::tls12::server_hello] Server supports tickets
+[2024-06-17T21:16:37Z DEBUG rustls::client::tls12] ECDHE curve is EcParameters { curve_type: NamedCurve, named_group: secp256r1 }
+[2024-06-17T21:16:37Z DEBUG rustls::client::tls12] Server DNS name is DnsName("api.wheretheiss.at")
+[2024-06-17T21:16:37Z DEBUG ureq::stream] created stream: Stream(RustlsStream)
+[2024-06-17T21:16:37Z DEBUG ureq::unit] sending request GET https://api.wheretheiss.at/v1/satellites/25544
+[2024-06-17T21:16:37Z DEBUG ureq::unit] writing prelude: GET /v1/satellites/25544 HTTP/1.1
+Host: api.wheretheiss.at
+User-Agent: ureq/2.9.7
+Accept: */*
+accept-encoding: gzip
+[2024-06-17T21:16:37Z DEBUG ureq::response] Body entirely buffered (length: 313)
+[2024-06-17T21:16:37Z DEBUG ureq::pool] adding stream to pool: https|api.wheretheiss.at|443 -> Stream(RustlsStream)
+[2024-06-17T21:16:37Z DEBUG ureq::unit] response 200 to GET https://api.wheretheiss.at/v1/satellites/25544
+[2024-06-17T21:16:37Z DEBUG ureq::stream] dropping stream: Stream(RustlsStream)
+[2024-06-17T21:16:37Z INFO issloc] Got data from API!
+[2024-06-17T21:16:37Z DEBUG issloc] Data from the API: IssData {
+    name: "iss",
+    id: 25544,
+    latitude: -42.503630848768,
+    longitude: -47.790370109914,
+    altitude: 433.30818614263,
+    velocity: 27543.366693257,
+    visibility: "daylight",
+    footprint: 4574.5591467835,
+    timestamp: 1718658996,
+    daynum: 2460479.3865278,
+    solar_lat: 23.408036320871,
+    solar_lon: 221.13652447556,
+    units: "kilometers",
+}
+[2024-06-17T21:16:37Z INFO issloc::ui] Constructing UI!
+[2024-06-17T21:16:37Z DEBUG issloc::ui] Data in the UI function: IssData {
+    name: "iss",
+    id: 25544,
+    latitude: -42.503630848768,
+    longitude: -47.790370109914,
+    altitude: 433.30818614263,
+    velocity: 27543.366693257,
+    visibility: "daylight",
+    footprint: 4574.5591467835,
+    timestamp: 1718658996,
+    daynum: 2460479.3865278,
+    solar_lat: 23.408036320871,
+    solar_lon: 221.13652447556,
+    units: "kilometers",
+}
+[2024-06-17T21:16:37Z INFO issloc::ui] Layout made!
+[2024-06-17T21:16:37Z INFO issloc::ui] Tracking PG made!
+[2024-06-17T21:16:37Z INFO issloc::ui] Tracking info PG made!
+[2024-06-17T21:16:37Z INFO issloc::ui] Drawing world!
+[2024-06-17T21:16:37Z INFO issloc::ui] Map made!
+[2024-06-17T21:16:37Z INFO issloc] Timer ticked! Pinging API!
+[2024-06-17T21:16:37Z DEBUG ureq::stream] connecting to api.wheretheiss.at:443 at 69.164.207.240:443
+[2024-06-17T21:16:37Z DEBUG rustls::client::hs] Resuming session
+[2024-06-17T21:16:37Z DEBUG rustls::client::hs] ALPN protocol is None
+[2024-06-17T21:16:37Z DEBUG rustls::client::hs] Using ciphersuite TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+[2024-06-17T21:16:37Z DEBUG rustls::client::tls12::server_hello] Server agreed to resume
+[2024-06-17T21:16:37Z DEBUG ureq::stream] created stream: Stream(RustlsStream)
+[2024-06-17T21:16:37Z DEBUG ureq::unit] sending request GET https://api.wheretheiss.at/v1/satellites/25544
+[2024-06-17T21:16:37Z DEBUG ureq::unit] writing prelude: GET /v1/satellites/25544 HTTP/1.1
+Host: api.wheretheiss.at
+User-Agent: ureq/2.9.7
+Accept: */*
+accept-encoding: gzip
+[2024-06-17T21:16:37Z DEBUG ureq::response] Body entirely buffered (length: 313)
+[2024-06-17T21:16:37Z DEBUG ureq::pool] adding stream to pool: https|api.wheretheiss.at|443 -> Stream(RustlsStream)
+[2024-06-17T21:16:37Z DEBUG ureq::unit] response 200 to GET https://api.wheretheiss.at/v1/satellites/25544
+[2024-06-17T21:16:37Z DEBUG ureq::stream] dropping stream: Stream(RustlsStream)
+[2024-06-17T21:16:37Z INFO issloc] Got data from API!
+[2024-06-17T21:16:37Z DEBUG issloc] Data from the API: IssData {
+    name: "iss",
+    id: 25544,
+    latitude: -42.503630848768,
+    longitude: -47.790370109914,
+    altitude: 433.30818614263,
+    velocity: 27543.366693257,
+    visibility: "daylight",
+    footprint: 4574.5591467835,
+    timestamp: 1718658996,
+    daynum: 2460479.3865278,
+    solar_lat: 23.408036320871,
+    solar_lon: 221.13652447556,
+    units: "kilometers",
+}
+[2024-06-17T21:16:37Z INFO issloc::ui] Constructing UI!
+[2024-06-17T21:16:37Z DEBUG issloc::ui] Data in the UI function: IssData {
+    name: "iss",
+    id: 25544,
+    latitude: -42.503630848768,
+    longitude: -47.790370109914,
+    altitude: 433.30818614263,
+    velocity: 27543.366693257,
+    visibility: "daylight",
+    footprint: 4574.5591467835,
+    timestamp: 1718658996,
+    daynum: 2460479.3865278,
+    solar_lat: 23.408036320871,
+    solar_lon: 221.13652447556,
+    units: "kilometers",
+}
+[2024-06-17T21:16:37Z INFO issloc::ui] Layout made!
+[2024-06-17T21:16:37Z INFO issloc::ui] Tracking PG made!
+[2024-06-17T21:16:37Z INFO issloc::ui] Tracking info PG made!
+[2024-06-17T21:16:37Z INFO issloc::ui] Drawing world!
+[2024-06-17T21:16:37Z INFO issloc::ui] Map made!
+[2024-06-17T21:17:26Z DEBUG issloc] Data from the API: IssData {
+    name: "iss",
+    id: 25544,
+    latitude: -42.503630848768,
+    longitude: -47.790370109914,
+    altitude: 433.30818614263,
+    velocity: 27543.366693257,
+    visibility: "daylight",
+    footprint: 4574.5591467835,
+    timestamp: 1718658996,
+    daynum: 2460479.3865278,
+    solar_lat: 23.408036320871,
+    solar_lon: 221.13652447556,
+    units: "kilometers",
+}
+[2024-06-17T21:17:26Z INFO issloc::ui] Constructing UI!
+[2024-06-17T21:17:26Z DEBUG issloc::ui] Data in the UI function: IssData {
+    name: "iss",
+    id: 25544,
+    latitude: -42.503630848768,
+    longitude: -47.790370109914,
+    altitude: 433.30818614263,
+    velocity: 27543.366693257,
+    visibility: "daylight",
+    footprint: 4574.5591467835,
+    timestamp: 1718658996,
+    daynum: 2460479.3865278,
+    solar_lat: 23.408036320871,
+    solar_lon: 221.13652447556,
+    units: "kilometers",
+}
+[2024-06-17T21:17:26Z INFO issloc::ui] Layout made!
+[2024-06-17T21:17:26Z INFO issloc::ui] Tracking PG made!
+[2024-06-17T21:17:26Z INFO issloc::ui] Tracking info PG made!
+[2024-06-17T21:17:26Z INFO issloc::ui] Drawing world!
+[2024-06-17T21:17:26Z INFO issloc::ui] Map made!
+[2024-06-17T21:17:30Z INFO issloc] Initialized logging!
+[2024-06-17T21:17:30Z INFO issloc] App initialized!
+[2024-06-17T21:17:30Z INFO issloc] Timer ticked! Pinging API!
+[2024-06-17T21:17:30Z DEBUG ureq::stream] connecting to api.wheretheiss.at:443 at 69.164.207.240:443
+[2024-06-17T21:17:30Z DEBUG rustls::client::hs] No cached session for DnsName("api.wheretheiss.at")
+[2024-06-17T21:17:30Z DEBUG rustls::client::hs] Not resuming any session
+[2024-06-17T21:17:30Z DEBUG rustls::client::hs] ALPN protocol is None
+[2024-06-17T21:17:30Z DEBUG rustls::client::hs] Using ciphersuite TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+[2024-06-17T21:17:30Z DEBUG rustls::client::tls12::server_hello] Server supports tickets
+[2024-06-17T21:17:30Z DEBUG rustls::client::tls12] ECDHE curve is EcParameters { curve_type: NamedCurve, named_group: secp256r1 }
+[2024-06-17T21:17:30Z DEBUG rustls::client::tls12] Server DNS name is DnsName("api.wheretheiss.at")
+[2024-06-17T21:17:30Z DEBUG ureq::stream] created stream: Stream(RustlsStream)
+[2024-06-17T21:17:30Z DEBUG ureq::unit] sending request GET https://api.wheretheiss.at/v1/satellites/25544
+[2024-06-17T21:17:30Z DEBUG ureq::unit] writing prelude: GET /v1/satellites/25544 HTTP/1.1
+Host: api.wheretheiss.at
+User-Agent: ureq/2.9.7
+Accept: */*
+accept-encoding: gzip
+[2024-06-17T21:17:30Z DEBUG ureq::response] Body entirely buffered (length: 313)
+[2024-06-17T21:17:30Z DEBUG ureq::pool] adding stream to pool: https|api.wheretheiss.at|443 -> Stream(RustlsStream)
+[2024-06-17T21:17:30Z DEBUG ureq::unit] response 200 to GET https://api.wheretheiss.at/v1/satellites/25544
+[2024-06-17T21:17:30Z DEBUG ureq::stream] dropping stream: Stream(RustlsStream)
+[2024-06-17T21:17:30Z INFO issloc] Got data from API!
+[2024-06-17T21:17:30Z DEBUG issloc] Data from the API: IssData {
+    name: "iss",
+    id: 25544,
+    latitude: -44.291725754276,
+    longitude: -44.016467008758,
+    altitude: 433.62781098184,
+    velocity: 27543.542153565,
+    visibility: "daylight",
+    footprint: 4576.1558126873,
+    timestamp: 1718659049,
+    daynum: 2460479.3871412,
+    solar_lat: 23.408048910002,
+    solar_lon: 220.91572454855,
+    units: "kilometers",
+}
+[2024-06-17T21:17:30Z INFO issloc::ui] Constructing UI!
+[2024-06-17T21:17:30Z DEBUG issloc::ui] Data in the UI function: IssData {
+    name: "iss",
+    id: 25544,
+    latitude: -44.291725754276,
+    longitude: -44.016467008758,
+    altitude: 433.62781098184,
+    velocity: 27543.542153565,
+    visibility: "daylight",
+    footprint: 4576.1558126873,
+    timestamp: 1718659049,
+    daynum: 2460479.3871412,
+    solar_lat: 23.408048910002,
+    solar_lon: 220.91572454855,
+    units: "kilometers",
+}
+[2024-06-17T21:17:30Z INFO issloc::ui] Layout made!
+[2024-06-17T21:17:30Z INFO issloc::ui] Tracking PG made!
+[2024-06-17T21:17:30Z INFO issloc::ui] Tracking info PG made!
+[2024-06-17T21:17:30Z INFO issloc::ui] Drawing world!
+[2024-06-17T21:17:30Z INFO issloc::ui] Map made!
+[2024-06-17T21:17:30Z INFO issloc] Timer ticked! Pinging API!
+[2024-06-17T21:17:30Z DEBUG ureq::stream] connecting to api.wheretheiss.at:443 at 69.164.207.240:443
+[2024-06-17T21:17:30Z DEBUG rustls::client::hs] Resuming session
+[2024-06-17T21:17:30Z DEBUG rustls::client::hs] ALPN protocol is None
+[2024-06-17T21:17:30Z DEBUG rustls::client::hs] Using ciphersuite TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+[2024-06-17T21:17:30Z DEBUG rustls::client::tls12::server_hello] Server agreed to resume
+[2024-06-17T21:17:30Z DEBUG ureq::stream] created stream: Stream(RustlsStream)
+[2024-06-17T21:17:30Z DEBUG ureq::unit] sending request GET https://api.wheretheiss.at/v1/satellites/25544
+[2024-06-17T21:17:30Z DEBUG ureq::unit] writing prelude: GET /v1/satellites/25544 HTTP/1.1
+Host: api.wheretheiss.at
+User-Agent: ureq/2.9.7
+Accept: */*
+accept-encoding: gzip
+[2024-06-17T21:17:31Z DEBUG ureq::response] Body entirely buffered (length: 313)
+[2024-06-17T21:17:31Z DEBUG ureq::pool] adding stream to pool: https|api.wheretheiss.at|443 -> Stream(RustlsStream)
+[2024-06-17T21:17:31Z DEBUG ureq::unit] response 200 to GET https://api.wheretheiss.at/v1/satellites/25544
+[2024-06-17T21:17:31Z DEBUG ureq::stream] dropping stream: Stream(RustlsStream)
+[2024-06-17T21:17:31Z INFO issloc] Got data from API!
+[2024-06-17T21:17:31Z DEBUG issloc] Data from the API: IssData {
+    name: "iss",
+    id: 25544,
+    latitude: -44.291725754276,
+    longitude: -44.016467008758,
+    altitude: 433.62781098184,
+    velocity: 27543.542153565,
+    visibility: "daylight",
+    footprint: 4576.1558126873,
+    timestamp: 1718659049,
+    daynum: 2460479.3871412,
+    solar_lat: 23.408048910002,
+    solar_lon: 220.91572454855,
+    units: "kilometers",
+}
+[2024-06-17T21:17:31Z INFO issloc::ui] Constructing UI!
+[2024-06-17T21:17:31Z DEBUG issloc::ui] Data in the UI function: IssData {
+    name: "iss",
+    id: 25544,
+    latitude: -44.291725754276,
+    longitude: -44.016467008758,
+    altitude: 433.62781098184,
+    velocity: 27543.542153565,
+    visibility: "daylight",
+    footprint: 4576.1558126873,
+    timestamp: 1718659049,
+    daynum: 2460479.3871412,
+    solar_lat: 23.408048910002,
+    solar_lon: 220.91572454855,
+    units: "kilometers",
+}
+[2024-06-17T21:17:31Z INFO issloc::ui] Layout made!
+[2024-06-17T21:17:31Z INFO issloc::ui] Tracking PG made!
+[2024-06-17T21:17:31Z INFO issloc::ui] Tracking info PG made!
+[2024-06-17T21:17:31Z INFO issloc::ui] Drawing world!
+[2024-06-17T21:17:31Z INFO issloc::ui] Map made!
+[2024-06-17T21:17:37Z DEBUG issloc] Data from the API: IssData {
+    name: "iss",
+    id: 25544,
+    latitude: -44.291725754276,
+    longitude: -44.016467008758,
+    altitude: 433.62781098184,
+    velocity: 27543.542153565,
+    visibility: "daylight",
+    footprint: 4576.1558126873,
+    timestamp: 1718659049,
+    daynum: 2460479.3871412,
+    solar_lat: 23.408048910002,
+    solar_lon: 220.91572454855,
+    units: "kilometers",
+}
+[2024-06-17T21:17:37Z INFO issloc::ui] Constructing UI!
+[2024-06-17T21:17:37Z DEBUG issloc::ui] Data in the UI function: IssData {
+    name: "iss",
+    id: 25544,
+    latitude: -44.291725754276,
+    longitude: -44.016467008758,
+    altitude: 433.62781098184,
+    velocity: 27543.542153565,
+    visibility: "daylight",
+    footprint: 4576.1558126873,
+    timestamp: 1718659049,
+    daynum: 2460479.3871412,
+    solar_lat: 23.408048910002,
+    solar_lon: 220.91572454855,
+    units: "kilometers",
+}
+[2024-06-17T21:17:37Z INFO issloc::ui] Layout made!
+[2024-06-17T21:17:37Z INFO issloc::ui] Tracking PG made!
+[2024-06-17T21:17:37Z INFO issloc::ui] Tracking info PG made!
+[2024-06-17T21:17:37Z INFO issloc::ui] Drawing world!
+[2024-06-17T21:17:37Z INFO issloc::ui] Map made!
