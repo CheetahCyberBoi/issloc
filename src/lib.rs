@@ -1,3 +1,9 @@
+//! # ISSloc-rs
+//! 
+//! `issloc_rs` is a binary crate that, when run, displays the current position of the International
+//! Space Station on a map, alongside data on the right.
+
+
 use std::io;
 use std::time::Duration;
 use std::time::SystemTime;
