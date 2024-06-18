@@ -1,13 +1,6 @@
-use std::io;
-use std::time::Duration;
-use std::time::SystemTime;
+use log::info;
 
-use serde::Deserialize;
-use crossterm::event::{self, Event, KeyEventKind};
-
-use log::{debug, info, warn};
-
-use issloc::App;
+use issloc::app::App;
 use issloc::tui;
 
 

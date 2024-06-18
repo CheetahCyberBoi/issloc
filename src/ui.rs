@@ -1,6 +1,7 @@
 use std::rc::Rc;
 
 use crate::*;
+use crate::app::App;
 
 use ratatui::layout::*;
 use ratatui::Frame;
