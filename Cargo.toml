@@ -3,7 +3,7 @@ name = "issloc"
 version = "0.1.3"
 edition = "2021"
 description = "A crate that tracks the International Space Station."
-license = "GPLv3"
+license = "GPL-3.0-or-later"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
