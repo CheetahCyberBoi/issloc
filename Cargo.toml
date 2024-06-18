@@ -1,6 +1,6 @@
 [package]
 name = "issloc"
-version = "0.1.5"
+version = "0.1.6"
 edition = "2021"
 description = "A crate that tracks the International Space Station."
 repository = "https://github.com/CheetahCyberBoi/issloc"
