@@ -3,11 +3,10 @@ use std::time::Duration;
 use std::time::SystemTime;
 
 use serde::Deserialize;
-use crossterm::event::{self, Event, KeyCode, KeyEvent, KeyEventKind};
-use pollster::FutureExt as _;
+use crossterm::event::{self, Event, KeyEventKind};
 use crate::tui::Action;
 use crate::timer::Timer;
-use log::{debug, error, info, trace, warn};
+use log::{debug, info, warn};
 
 
 pub mod ui;
