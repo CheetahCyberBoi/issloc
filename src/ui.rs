@@ -127,7 +127,7 @@ pub fn render_tracking_info_pg(data: &IssData, ping_delay: u64, frame: &mut Fram
 }
 
 //Renders the 'Currently Tracking' paragraph
-pub fn render_currently_tracking_pg(data: &IssData, frame: &mut Frame, rect: Rect) {
+pub fn render_currently_tracking_pg(_data: &IssData, frame: &mut Frame, rect: Rect) {
     //Set up the leftward paragraph: displaying the currently tracked target (always the ISS lol :P)
     let mut lines = vec![];
     lines.push(ratatui::text::Line::from(vec![
