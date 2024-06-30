@@ -4,19 +4,8 @@
 //! Space Station on a map, alongside data on the right.
 
 
-use std::io;
-use std::time::Duration;
-use std::time::SystemTime;
-
-use crossterm::event::{Event, KeyEventKind};
-use crossterm::event;
 
 use serde::Deserialize;
-
-use log::{info, warn, debug};
-
-use crate::timer::Timer;
-use crate::tui::Action;
 
 pub mod ui;
 pub mod tui;
