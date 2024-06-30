@@ -3,13 +3,6 @@ use log::info;
 use issloc::app::App;
 use issloc::tui;
 
-
-
-
-
-
-
-
 fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     info!("Initialized logging!");
